@@ -23,7 +23,7 @@ We have three instances : kerberos server , PostgreSQL server and the client :)
 `Systemctl stop firewalld`
 2. For all instances check the ips of the instances and 
 edit the /etc/hosts for better readability (you can check your ip in the network with `ìfconfig` on the cli)
-![hosts](./screenshots/hosts.png)
+![hosts](./Screenshots/hosts.png)
 ### Let's start by the configuration of the KDC server:
 
 
@@ -31,10 +31,10 @@ edit the /etc/hosts for better readability (you can check your ip in the network
 `yum install krb5-server krb5-workstation pan_krb5`
 4. go and edit the file /var/kerberos/krd5kdc/kdc.conf
 and make sure it looks like this : (use the realm name that you want but stay consistent :))
-![kdc.conf](./screenshots/kdc.conf.png)
+![kdc.conf](./Screenshots/kdc.conf.png)
 5. go and edit the file /etc/krb5.conf:
-![krb5.conf part 1](./screenshots/krb5.conf.pt1.png) 
-![Part 2](./screenshots/krb5.conf.pt2.png)
+![krb5.conf part 1](./Screenshots/krb5.conf.pt1.png) 
+![Part 2](./Screenshots/krb5.conf.pt2.png)
 6. go and edit the file /var/kerberos/krb5kdc/kadm5.acl (our access control list file) to */admin@HOPTO.ORG to make sure the admin user can connect with default privileges.
 7. Kerberos DB: stores Principal information, including names, secret keys, and attributes, policy information, such as password policies, lockout policies, and ticket policies, Realm information, such as realm names, master keys, and trust relationships with other realms
 Let's create a kerberos database :) :
@@ -63,7 +63,7 @@ and uncomment krb_server_keyfile and link it to the keytab that you transfered f
 3. now save and exit :).
 4. now go to the pg_hba.conf (the postgresql client auth conf file.)
 5. make sure it looks like this: (this modification ensures that benson client can access to the database from outside this instance.)
-![pg_hba.conf](./screenshots/pg_hba.conf.png)
+![pg_hba.conf](./Screenshots/pg_hba.conf.png)
 ### Now and finally go to the client server:
 1. let's install kerberos client to make sure that we can interact with our environment:
 `yum install krb5-workstation pam_krb5 -y`
@@ -75,7 +75,7 @@ and uncomment krb_server_keyfile and link it to the keytab that you transfered f
 
 4. Now the final step! we connect to the postgreSQL server with this command : 
 `psql -h epasdatabase.hopto.org -U benson`
-![Connecting!](./screenshots/final.png)
+![Connecting!](./Screenshots/final.png)
 
 
 ## Usage
